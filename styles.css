@@ -38,6 +38,7 @@ body {
     width: 100%;
     text-align: center;
     padding: 6px;
+    text-transform: uppercase;
   }
   
   #add_btn{
@@ -54,7 +55,7 @@ body {
   }
 
   #add_btn:hover{
-    background-color: grey;
+    background-color: #f25f4c;
   }
 
   .todo{
@@ -65,7 +66,7 @@ body {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(135, 135, 135, 0.5) 0px 4px 12px;
     margin: 0.5rem 0;
   }
 
