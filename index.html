@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>TODO List</title>
+  </head>
+  <body>
+    <!--  MODAL -->
+    <div class="modal" id="todo_form">
+      <div class="header">
+        <div class="title">Crear nueva tarea</div>
+        <button class="btn close-modal">&times;</button>
+      </div>
+      <div class="body">
+        <input type="text" id="todo_input" placeholder="Nueva tarea"/>
+        <input type="submit" value="Añadir tarea" id="todo_submit" />
+      </div>
+    </div>
+    <!-- TODO LIST -->
+    <div class="container">
+      <div class="status" id="no_status">
+        <h2>No asignada</h2>
+        <button id="add_btn" data-target-modal="#todo_form">
+          + Nueva tarea
+        </button>
+        <!-- Le indicamos al elemento arrastrable que va a serlo con el atributo draggable en true -->
+        <div class="todo" draggable="true">
+          Coding
+          <span class="close">&times;</span>
+        </div>
+      </div>
+      <div class="status">
+        <h2>Sin empezar</h2>
+      </div>
+      <div class="status">
+        <h2>En progreso</h2>
+      </div>
+      <div class="status">
+        <h2>Completada</h2>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
