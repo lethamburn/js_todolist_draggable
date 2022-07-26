@@ -45,7 +45,7 @@ function dragEnter() {
 //Definimos la función que se ejecuta al detectar que un elemento arrastrable ha dejado la columna.
 function dragLeave() {
   //console.log("Me acaban de soltar un elemento arrastrable");
-   //Al sacar de la columna el elemento le quitaremos los estilos que le hemos definido antes al empezar el arrastre
+  //Al sacar de la columna el elemento le quitaremos los estilos que le hemos definido antes al empezar el arrastre
   this.style.border = "none";
 }
 
@@ -56,7 +56,6 @@ function dragDrop() {
   //Al soltar el elemento le quitaremos los estilos que le hemos definido antes al empezar el arrastre
   this.style.border = "none";
   this.appendChild(draggableTodo);
-
 }
 
 //Por cada una de las columnas asignables le añadimos un escuchador de eventos mediante el evento dragover que se activará en cuanto le pasemos por encima un elemento arrastrable, otro con el evento dragenter que se activará al introducir en cada una de las columnas un elemento arrastable y otro con el evento dragleave al perder un elemento arrastrable
@@ -68,6 +67,7 @@ all_status.forEach((status) => {
 });
 
 //-----------------------------------------------
+
 //Recuperamos los botones de los modales, los cierres del modal y el overlay para mostrar una capa "opaca" por detrás
 const btns = document.querySelectorAll("[data-target-modal]");
 const close_modals = document.querySelectorAll(".close-modal");
@@ -105,55 +105,59 @@ const todo_submit = document.getElementById("todo_submit");
 todo_submit.addEventListener("click", createTodo);
 
 //Definimos la función de crear una nueva tarea
-function createTodo () {
-    //Creamos un div
-    const todo_div = document.createElement("div");
-    //Recuperamos el valor de input
-    const input_val = document.getElementById("todo_input").value;
-    //Creamos un nodo de texto con el valor del input
-    const txt = document.createTextNode(input_val);
+function createTodo() {
+  //Creamos un div
+  const todo_div = document.createElement("div");
+  //Recuperamos el valor de input
+  const input_val = document.getElementById("todo_input").value;
+  //Creamos un nodo de texto con el valor del input
+  const txt = document.createTextNode(input_val);
 
-    //Le inyectamos el texto al div
-    todo_div.appendChild(txt);
-    //Le añadimos la clase todo
-    todo_div.classList.add("todo");
-    //Lo hacemos arrastrable
-    todo_div.setAttribute("draggable", "true");
-    
-    //Creamos un span para meterle el botón para eliminar
-    const span = document.createElement("span");
-    //Le introducimos el simbolo de la X
-    const span_txt = document.createTextNode("\u00D7");
-    //Le añadimos la clase
-    span.classList.add("close");
-    //Le añadimos el texto como hijo
-    span.appendChild(span_txt);
+  //Le inyectamos el texto al div
+  todo_div.appendChild(txt);
+  //Le añadimos la clase todo
+  todo_div.classList.add("todo");
+  //Lo hacemos arrastrable
+  todo_div.setAttribute("draggable", "true");
 
+  //Creamos un span para meterle el botón para eliminar
+  const span = document.createElement("span");
+  //Le introducimos el simbolo de la X
+  const span_txt = document.createTextNode("\u00D7");
+  //Le añadimos la clase
+  span.classList.add("close");
+  //Le añadimos el texto como hijo
+  span.appendChild(span_txt);
 
-    //Le añadimos el span al div
-    todo_div.appendChild(span);
+  //Le añadimos el span al div
+  todo_div.appendChild(span);
 
-    //Le decimos que todos tengan las acciones de arrastrar como la incial
-    todo_div.addEventListener("dragstart", dragStart);
-    todo_div.addEventListener("dragEnd", dragEnd);
+  //Le decimos que todos tengan las acciones de arrastrar como la incial
+  todo_div.addEventListener("dragstart", dragStart);
+  todo_div.addEventListener("dragEnd", dragEnd);
 
-    //En la nueva versión de JS nos permite atacar directamente a un id de esta forma, por lo que vamos a inyectarle el nuevo div generado a la columna de No Asignada a través de su id
-    no_status.appendChild(todo_div);
+  //En la nueva versión de JS nos permite atacar directamente a un id de esta forma, por lo que vamos a inyectarle el nuevo div generado a la columna de No Asignada a través de su id
+  no_status.appendChild(todo_div);
 
-    //Los spans de antes tendrán la acción al hacer click que hagan desaparecer las tareas al pulsar la X
-    span.addEventListener("click", ()=> {
-        span.parentElement.style.display = "none";
-    })
+  //Los spans de antes tendrán la acción al hacer click que hagan desaparecer las tareas al pulsar la X
+  span.addEventListener("click", () => {
+    span.parentElement.style.display = "none";
+  });
 
-    //Eliminamos las clases para que dejen de verse tanto el modal como el overlay cuando creemos la nueva tarea
-    todo_form.classList.remove("active");
-    overlay.classList.remove("active");
+  //Eliminamos las clases para que dejen de verse tanto el modal como el overlay cuando creemos la nueva tarea
+  todo_form.classList.remove("active");
+  overlay.classList.remove("active");
 }
 
 //Por cada uno de los botones de X vamos a hacer que desparezcan los elementos
 const close_btns = document.querySelectorAll(".close");
-close_btns.forEach(btn => {
-btn.addEventListener("click", ()=> {
-    btn.parentElement.style.display = "none";
-})
-})
+close_btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    //Borramos por completo el elemento padre del btn, que es el div de la tarea
+    btn.parentElement.remove();
+  });
+});
+
+//!PROGRESION
+//Solo se podrá pasar de la primera columna a la segunda progresivamente
+//Que en cada una de las tareas al clicar se vea un modal con el detalle de las tareas y el estado
